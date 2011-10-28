@@ -22,13 +22,10 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QStackedWidget" name="mainStackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>-1</number>
       </property>
-      <widget class="QWidget" name="page"/>
-      <widget class="QWidget" name="page_3"/>
-      <widget class="QWidget" name="page_2"/>
      </widget>
     </item>
    </layout>
