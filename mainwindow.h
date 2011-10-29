@@ -21,6 +21,7 @@ public:
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
     void switchToWidget(Widgets widget);
 
 private:

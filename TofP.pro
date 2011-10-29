@@ -15,19 +15,23 @@ SOURCES += main.cpp\
     loginform.cpp \
     userform.cpp \
     transportmanagerform.cpp \
-    productmanagerform.cpp
+    productmanagerform.cpp \
+    tofpapplication.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
     userform.h \
     transportmanagerform.h \
-    productmanagerform.h
+    productmanagerform.h \
+    tofpapplication.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
     userform.ui \
     transportmanagerform.ui \
     productmanagerform.ui
+
+
 
 
 
