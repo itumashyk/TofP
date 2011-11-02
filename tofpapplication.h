@@ -11,9 +11,13 @@ class TofPApplication : public QApplication
 
 public:
     TofPApplication(int& a1, char**& a2);
+    ~TofPApplication();
     static void setMainWindow(MainWindow* mainWindow);
-
     static MainWindow* getMainWindow();
+    static int exec();
+
+private:
+    static void connectToDB();
 };
 
 #endif // TOFPAPPLICATION_H

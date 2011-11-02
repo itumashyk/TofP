@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 TARGET = TofP
 TEMPLATE = app
@@ -30,6 +30,10 @@ FORMS    += mainwindow.ui \
     userform.ui \
     transportmanagerform.ui \
     productmanagerform.ui
+
+OTHER_FILES += \
+    config.ini
+
 
 
 

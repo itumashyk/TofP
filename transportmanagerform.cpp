@@ -12,3 +12,4 @@ TransportManagerForm::~TransportManagerForm()
 {
     delete ui;
 }
+
