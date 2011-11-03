@@ -2,7 +2,7 @@
 #include "ui_transportmanagerform.h"
 
 TransportManagerForm::TransportManagerForm(QWidget *parent) :
-    QWidget(parent),
+    BaseWidget(parent),
     ui(new Ui::TransportManagerForm)
 {
     ui->setupUi(this);

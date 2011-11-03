@@ -2,12 +2,13 @@
 #define TRANSPORTMANAGERFORM_H
 
 #include <QWidget>
+#include "basewidget.h"
 
 namespace Ui {
     class TransportManagerForm;
 }
 
-class TransportManagerForm : public QWidget
+class TransportManagerForm : public BaseWidget
 {
     Q_OBJECT
 

@@ -2,12 +2,13 @@
 #define USERFORM_H
 
 #include <QWidget>
+#include "basewidget.h"
 
 namespace Ui {
     class UserForm;
 }
 
-class UserForm : public QWidget
+class UserForm : public BaseWidget
 {
     Q_OBJECT
 

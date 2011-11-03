@@ -2,12 +2,13 @@
 #define PRODUCTMANAGERFORM_H
 
 #include <QWidget>
+#include "basewidget.h"
 
 namespace Ui {
     class ProductManagerForm;
 }
 
-class ProductManagerForm : public QWidget
+class ProductManagerForm : public BaseWidget
 {
     Q_OBJECT
 

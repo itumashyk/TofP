@@ -4,7 +4,7 @@
 #include "mainwindow.h"
 
 LoginForm::LoginForm(QWidget *parent) :
-    QWidget(parent),
+    BaseWidget(parent),
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);

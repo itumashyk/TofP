@@ -2,12 +2,13 @@
 #define LOGINFORM_H
 
 #include <QWidget>
+#include "basewidget.h"
 
 namespace Ui {
     class LoginForm;
 }
 
-class LoginForm : public QWidget
+class LoginForm : public BaseWidget
 {
     Q_OBJECT
 

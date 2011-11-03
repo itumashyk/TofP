@@ -16,14 +16,16 @@ SOURCES += main.cpp\
     userform.cpp \
     transportmanagerform.cpp \
     productmanagerform.cpp \
-    tofpapplication.cpp
+    tofpapplication.cpp \
+    basewidget.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
     userform.h \
     transportmanagerform.h \
     productmanagerform.h \
-    tofpapplication.h
+    tofpapplication.h \
+    basewidget.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
@@ -33,6 +35,8 @@ FORMS    += mainwindow.ui \
 
 OTHER_FILES += \
     config.ini
+
+
 
 
 
