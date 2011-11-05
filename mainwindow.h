@@ -12,10 +12,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    enum Widgets {
+    enum Widgets
+    {
         LOGIN = 0,
         USER = 1,
-        PRODUCT = 2,
+        GOODS = 2,
         TRANSPORT = 3
     };
 

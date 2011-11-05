@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "basewidget.h"
+#include "roles.h"
 
 namespace Ui {
     class LoginForm;
@@ -16,8 +17,12 @@ public:
     explicit LoginForm(QWidget *parent = 0);
     ~LoginForm();
 
+private:
+    void showWidgetAccordingRole(Roles role);
+
 private slots:
-    void on_pushButton_clicked();
+
+    void on_loginButton_clicked();
 
 private:
     Ui::LoginForm *ui;

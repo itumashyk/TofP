@@ -12,6 +12,8 @@ TofPApplication:: TofPApplication(int &a1, char **&a2) :
 
 TofPApplication:: ~TofPApplication()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.close();
 }
 
 void TofPApplication:: setMainWindow(MainWindow* mainWindow)

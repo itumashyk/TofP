@@ -25,7 +25,8 @@ HEADERS  += mainwindow.h \
     transportmanagerform.h \
     productmanagerform.h \
     tofpapplication.h \
-    basewidget.h
+    basewidget.h \
+    roles.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
@@ -35,6 +36,9 @@ FORMS    += mainwindow.ui \
 
 OTHER_FILES += \
     config.ini
+
+
+
 
 
 
