@@ -13,12 +13,12 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>13</x>
      <y>13</y>
-     <width>161</width>
+     <width>174</width>
      <height>91</height>
     </rect>
    </property>
@@ -68,10 +68,12 @@
     </item>
    </layout>
   </widget>
-  <zorder>gridLayoutWidget</zorder>
-  <zorder></zorder>
-  <zorder>gridLayoutWidget</zorder>
  </widget>
+ <tabstops>
+  <tabstop>loginButton</tabstop>
+  <tabstop>loginLineEdit</tabstop>
+  <tabstop>passwordLineEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
