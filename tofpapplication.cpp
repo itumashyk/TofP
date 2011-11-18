@@ -50,7 +50,7 @@ void TofPApplication:: connectToDB()
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName(host);
-    db.setDatabaseName("top");
+    db.setDatabaseName("tofp");
     db.setUserName(userName);
     db.setPassword(password);
     bool ok = db.open();
@@ -61,4 +61,15 @@ void TofPApplication:: connectToDB()
     }
 }
 
+void TofPApplication:: setUserLogin(QString userLogin)
+{
+    TofPApplication::userLogin = userLogin;
+}
+
+QString TofPApplication:: getUserLogin()
+{
+    return userLogin;
+}
+
 MainWindow* TofPApplication::mainWindow = NULL;
+QString TofPApplication::userLogin = "";
