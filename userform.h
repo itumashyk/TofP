@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "basewidget.h"
+#include <QtSql>
 
 namespace Ui {
     class UserForm;
@@ -18,6 +19,9 @@ public:
 
 private:
     Ui::UserForm *ui;
+    QAbstractItemModel* tableModel;
+
+    void createTableModel();
 };
 
 #endif // USERFORM_H
