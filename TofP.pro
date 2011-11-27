@@ -9,6 +9,8 @@ QT       += core gui sql
 TARGET = TofP
 TEMPLATE = app
 
+CONFIG += warn_on
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -36,6 +38,12 @@ FORMS    += mainwindow.ui \
 
 OTHER_FILES += \
     config.ini
+
+RESOURCES += \
+    res.qrc
+
+
+
 
 
 

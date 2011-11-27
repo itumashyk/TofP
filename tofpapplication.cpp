@@ -29,6 +29,7 @@ MainWindow* TofPApplication:: getMainWindow()
 int TofPApplication::exec()
 {
     connectToDB();
+    QApplication::setStyle("cleanlooks");
     MainWindow w;
     w.show();
     TofPApplication::setMainWindow(&w);
@@ -39,7 +40,8 @@ void TofPApplication:: connectToDB()
 {
     QFile config ("config.ini");
     if (!config.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QMessageBox::critical(NULL, "Error", "Couldn't find configuration file");
+        QMessageBox::critical(NULL, "Error",
+            "Couldn't find configuration file");
         std::exit(1);
     }
 
@@ -56,7 +58,7 @@ void TofPApplication:: connectToDB()
     bool ok = db.open();
     if (!ok) {
         QMessageBox::critical(NULL, "Error", "Couldn't connect to DB." \
-                              " Reason: " + db.lastError().text());
+            " Reason: " + db.lastError().text());
         std::exit(1);
     }
 }
