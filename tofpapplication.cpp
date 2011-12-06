@@ -29,7 +29,6 @@ MainWindow* TofPApplication:: getMainWindow()
 int TofPApplication::exec()
 {
     connectToDB();
-    QApplication::setStyle("cleanlooks");
     MainWindow w;
     w.show();
     TofPApplication::setMainWindow(&w);

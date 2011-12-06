@@ -17,6 +17,9 @@ public:
     explicit UserForm(QWidget *parent = 0);
     ~UserForm();
 
+private slots:
+    void on_orderButton_clicked();
+
 private:
     Ui::UserForm *ui;
     QAbstractItemModel* tableModel;
