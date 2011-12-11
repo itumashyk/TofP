@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "basewidget.h"
+#include <QtSql>
 
 namespace Ui {
     class UserForm;
@@ -16,8 +17,14 @@ public:
     explicit UserForm(QWidget *parent = 0);
     ~UserForm();
 
+private slots:
+    void on_orderButton_clicked();
+
 private:
     Ui::UserForm *ui;
+    QAbstractItemModel* tableModel;
+
+    void createTableModel();
 };
 
 #endif // USERFORM_H

@@ -27,16 +27,17 @@ void LoginForm::on_loginButton_clicked()
 {
     QSqlQueryModel model;
     QSqlQuery query;
-    query.prepare("SELECT * FROM users WHERE login=?");
-    query.addBindValue(ui->loginLineEdit->text());
+    query.prepare("SELECT * FROM user WHERE login=?");
+    QString login = ui->loginLineEdit->text();
+    query.addBindValue(login);
     query.exec();
     model.setQuery(query);
 
-    int id = model.record(0).value("userid").toInt();
     QString password = model.record(0).value("password").toString();
     Roles role = (Roles) model.record(0).value("role").toInt();
     if(password != "" && password == ui->passwordLineEdit->text())
     {
+        TofPApplication::setUserLogin(login);
         showWidgetAccordingRole(role);
     }
     else
@@ -47,7 +48,6 @@ void LoginForm::on_loginButton_clicked()
 
 void LoginForm:: showWidgetAccordingRole(Roles role)
 {
-    qDebug()<<role;
     switch(role)
     {
     case USER:
