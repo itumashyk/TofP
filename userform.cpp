@@ -26,13 +26,12 @@ void UserForm:: createTableModel()
     QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
     model->setTable("good");
     model->setEditStrategy(QSqlTableModel::OnRowChange);
-    model->setRelation(1,QSqlRelation("company", "companyid", "name"));
+    model->setRelation(Producer, QSqlRelation("company", "companyid", "name"));
 
-
-    model->setHeaderData(1, Qt::Horizontal, "Producer");
-    model->setHeaderData(2, Qt::Horizontal, "Name");
-    model->setHeaderData(3, Qt::Horizontal, "Price, $");
-    model->setHeaderData(4, Qt::Horizontal, "Description");
+    model->setHeaderData(Producer, Qt::Horizontal, "Producer");
+    model->setHeaderData(Name, Qt::Horizontal, "Name");
+    model->setHeaderData(Price, Qt::Horizontal, "Price, $");
+    model->setHeaderData(Description, Qt::Horizontal, "Description");
     model->select();
     tableModel = model;
 }
