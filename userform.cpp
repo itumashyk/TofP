@@ -45,13 +45,39 @@ void UserForm::on_orderButton_clicked()
         QString name = tableModel->index(selectedRow, 2).data().toString();
         QString price = tableModel->index(selectedRow, 3).data().toString();
         int id = tableModel->index(selectedRow, 0).data().toInt();
-        qDebug() << tableModel->index(selectedRow, 0).data().toString();
+
         QString label = "You are going to by " + name + " for " + price +
             "$. " + "Please, inser address to deliver:";
-        qDebug() << QInputDialog::getText(this, "Order Product", label);
+        QString adress = QInputDialog::getText(this, "Order Product", label);
+        insertOrder(id, adress);
     }
     else
     {
-    QMessageBox::warning(this, "Make Order", "Please, select product first");
+        QMessageBox::warning(this, "Make Order",
+            "Please, select product first");
     }
+
+}
+
+
+void UserForm::insertOrder(int id, QString address)
+{
+    QSqlQuery query;
+    query.prepare("SELECT company_companyid FROM good WHERE goodid=?");
+    query.addBindValue(id);
+    query.exec();
+    query.next();
+    int companyid = query.value(0).toInt();
+
+    QSqlQuery insertQuery;
+    insertQuery.prepare(//"INSERT INTO order (catalog_goodid, catalog_company_companyid, user_login, date, address) VALUES (?, ?, ?, ?, ?)");
+    "INSERT INTO `order` (catalog_goodid, catalog_company_companyid, user_login, address) VALUES (?, ?, ?, ?)");
+
+   insertQuery.addBindValue(id);
+   insertQuery.addBindValue(companyid);
+   insertQuery.addBindValue("user");
+   //insertQuery.addBindValue(QDateTime());
+   insertQuery.addBindValue("addres");
+   qDebug() << insertQuery.exec();
+   qDebug() << insertQuery.lastError().text();
 }

@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::UserForm *ui;
     QAbstractItemModel* tableModel;
-
+    void insertOrder(int id, QString addres);
     void createTableModel();
 };
 
