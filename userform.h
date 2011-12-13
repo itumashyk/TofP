@@ -14,6 +14,14 @@ class UserForm : public BaseWidget
     Q_OBJECT
 
 public:
+
+    enum Column {
+        Producer = 1,
+        Name,
+        Price,
+        Description
+    };
+
     explicit UserForm(QWidget *parent = 0);
     ~UserForm();
 

@@ -10,6 +10,9 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -37,7 +40,11 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="loginLineEdit"/>
+     <widget class="QLineEdit" name="loginLineEdit">
+      <property name="focusPolicy">
+       <enum>Qt::TabFocus</enum>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
@@ -70,9 +77,9 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>loginButton</tabstop>
   <tabstop>loginLineEdit</tabstop>
   <tabstop>passwordLineEdit</tabstop>
+  <tabstop>loginButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>
