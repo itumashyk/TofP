@@ -1,5 +1,6 @@
 #include "userform.h"
 #include "ui_userform.h"
+#include <tofpapplication.h>
 #include <QtSql>
 #include <QtGui>
 
@@ -62,22 +63,34 @@ void UserForm::on_orderButton_clicked()
 
 void UserForm::insertOrder(int id, QString address)
 {
+    bool error = true;
     QSqlQuery query;
-    query.prepare("SELECT company_companyid FROM good WHERE goodid=?");
+    error &= query.prepare("SELECT company_companyid FROM good WHERE goodid=?");
     query.addBindValue(id);
     query.exec();
-    query.next();
+    error &= query.next();
     int companyid = query.value(0).toInt();
 
     QSqlQuery insertQuery;
-    insertQuery.prepare(//"INSERT INTO order (catalog_goodid, catalog_company_companyid, user_login, date, address) VALUES (?, ?, ?, ?, ?)");
-    "INSERT INTO `order` (catalog_goodid, catalog_company_companyid, user_login, date, address) VALUES (?, ?, ?, ?)");
+    error &= insertQuery.prepare(
+        "INSERT INTO `order` "\
+        "(catalog_goodid, catalog_company_companyid, user_login, date, address)"\
+        "VALUES (?, ?, ?, ?, ?)");
 
    insertQuery.addBindValue(id);
    insertQuery.addBindValue(companyid);
-   insertQuery.addBindValue("user");
-   insertQuery.addBindValue(QDateTime());
-   insertQuery.addBindValue("addres");
-   qDebug() << insertQuery.exec();
-   qDebug() << insertQuery.lastError().text();
+   insertQuery.addBindValue(TofPApplication::getUserLogin());
+   insertQuery.addBindValue(QDateTime::currentDateTime().toString(Qt::ISODate));
+   insertQuery.addBindValue(address);
+   error &= insertQuery.exec();
+   if (!error)
+   {
+        QMessageBox::critical(this, "Error while saving to DB.",
+            insertQuery.lastError().text());
+   }
+   else
+   {
+        QMessageBox::information(this, "Create order",
+            "Order was sucsessfully created");
+   }
 }
