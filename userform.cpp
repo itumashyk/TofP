@@ -71,12 +71,12 @@ void UserForm::insertOrder(int id, QString address)
 
     QSqlQuery insertQuery;
     insertQuery.prepare(//"INSERT INTO order (catalog_goodid, catalog_company_companyid, user_login, date, address) VALUES (?, ?, ?, ?, ?)");
-    "INSERT INTO `order` (catalog_goodid, catalog_company_companyid, user_login, address) VALUES (?, ?, ?, ?)");
+    "INSERT INTO `order` (catalog_goodid, catalog_company_companyid, user_login, date, address) VALUES (?, ?, ?, ?)");
 
    insertQuery.addBindValue(id);
    insertQuery.addBindValue(companyid);
    insertQuery.addBindValue("user");
-   //insertQuery.addBindValue(QDateTime());
+   insertQuery.addBindValue(QDateTime());
    insertQuery.addBindValue("addres");
    qDebug() << insertQuery.exec();
    qDebug() << insertQuery.lastError().text();
