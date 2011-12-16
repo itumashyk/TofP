@@ -27,6 +27,11 @@ public:
 
 private:
     Ui::MainWindow *ui;   
+
+    QWidget* loginForm;
+    QWidget* userForm;
+    QWidget* transportManagerForm;
+    QWidget* productsManagerForm;
 };
 
 #endif // MAINWINDOW_H

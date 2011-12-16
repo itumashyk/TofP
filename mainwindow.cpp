@@ -10,10 +10,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->mainStackedWidget->addWidget(new LoginForm);
-    ui->mainStackedWidget->addWidget(new UserForm);
-    ui->mainStackedWidget->addWidget(new ProductManagerForm);
-    ui->mainStackedWidget->addWidget(new TransportManagerForm);
+
+    loginForm = new LoginForm;
+    userForm = new UserForm;
+    productsManagerForm = new ProductManagerForm;
+    transportManagerForm = new TransportManagerForm;
+    connect(loginForm, SIGNAL(user_have_logined()), userForm, SLOT(on_user_logined()));
+
+    ui->mainStackedWidget->addWidget(loginForm);
+    ui->mainStackedWidget->addWidget(userForm);
+    ui->mainStackedWidget->addWidget(productsManagerForm);
+    ui->mainStackedWidget->addWidget(transportManagerForm);
 }
 
 MainWindow::~MainWindow()

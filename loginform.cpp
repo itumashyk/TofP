@@ -16,6 +16,7 @@ LoginForm::LoginForm(QWidget *parent) :
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
+
 }
 
 LoginForm::~LoginForm()
@@ -38,6 +39,7 @@ void LoginForm::on_loginButton_clicked()
     if(password != "" && password == ui->passwordLineEdit->text())
     {
         TofPApplication::setUserLogin(login);
+        emit user_have_logined();
         showWidgetAccordingRole(role);
     }
     else

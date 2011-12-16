@@ -17,12 +17,17 @@ public:
     explicit LoginForm(QWidget *parent = 0);
     ~LoginForm();
 
+signals:
+    void user_have_logined();
+
 private:
     void showWidgetAccordingRole(Roles role);
 
 private slots:
 
     void on_loginButton_clicked();
+
+
 
 private:
     Ui::LoginForm *ui;
