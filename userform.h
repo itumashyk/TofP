@@ -15,11 +15,18 @@ class UserForm : public BaseWidget
 
 public:
 
-    enum Column {
+    enum ColumnProduct {
         Producer = 1,
         Name,
         Price,
         Description
+    };
+
+    enum ColumnOrder{
+        orderId,
+        goodId,
+        date,
+        address
     };
 
     explicit UserForm(QWidget *parent = 0);
@@ -28,11 +35,19 @@ public:
 private slots:
     void on_orderButton_clicked();
 
+    void on_deleteButton_clicked();
+
+public slots:
+    void on_user_logined();
+
 private:
     Ui::UserForm *ui;
-    QAbstractItemModel* tableModel;
+    QAbstractItemModel* productsModel;
+    QAbstractItemModel* ordersModel;
+
     void insertOrder(int id, QString addres);
-    void createTableModel();
+    void createTableModels();
+    void loadTables();
 };
 
 #endif // USERFORM_H

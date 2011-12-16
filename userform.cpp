@@ -9,24 +9,19 @@ UserForm::UserForm(QWidget *parent) :
     ui(new Ui::UserForm)
 {
     ui->setupUi(this);
-    createTableModel();
-    QTableView* tableView = ui->tableView;
-    tableView->setItemDelegate(new QSqlRelationalDelegate(tableView));
-    tableView->setModel(tableModel);
-    tableView->setColumnHidden(0, true);
 }
 
 UserForm::~UserForm()
 {
-    delete tableModel;
+    delete productsModel;
+    delete ordersModel;
     delete ui;
 }
 
-void UserForm:: createTableModel()
+void UserForm:: createTableModels()
 {
     QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
     model->setTable("good");
-    model->setEditStrategy(QSqlTableModel::OnRowChange);
     model->setRelation(Producer, QSqlRelation("company", "companyid", "name"));
 
     model->setHeaderData(Producer, Qt::Horizontal, "Producer");
@@ -34,7 +29,22 @@ void UserForm:: createTableModel()
     model->setHeaderData(Price, Qt::Horizontal, "Price, $");
     model->setHeaderData(Description, Qt::Horizontal, "Description");
     model->select();
-    tableModel = model;
+    productsModel = model;
+
+    model = new QSqlRelationalTableModel();
+    model->setTable("`order`");
+    model->setRelation(goodId, QSqlRelation("good", "goodid", "name"));
+    model->setFilter("user_login='" + TofPApplication::getUserLogin() + "'");
+    model->select();   
+
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
+    model->removeColumn(3);
+    model->removeColumn(2);
+    model->setHeaderData(orderId, Qt::Horizontal, "Order #");
+    model->setHeaderData(goodId, Qt::Horizontal, "Product");
+    model->setHeaderData(date, Qt::Horizontal, "Date");
+    model->setHeaderData(address, Qt::Horizontal, "Address to deliver");
+    ordersModel = model;
 }
 
 
@@ -43,9 +53,9 @@ void UserForm::on_orderButton_clicked()
     int selectedRow = ui->tableView->currentIndex().row();
     if (selectedRow >= 0)
     {
-        QString name = tableModel->index(selectedRow, 2).data().toString();
-        QString price = tableModel->index(selectedRow, 3).data().toString();
-        int id = tableModel->index(selectedRow, 0).data().toInt();
+        QString name = productsModel->index(selectedRow, Name).data().toString();
+        QString price = productsModel->index(selectedRow,Price).data().toString();
+        int id = productsModel->index(selectedRow, 0).data().toInt();
 
         QString label = "You are going to by " + name + " for " + price +
             "$. " + "Please, inser address to deliver:";
@@ -57,7 +67,6 @@ void UserForm::on_orderButton_clicked()
         QMessageBox::warning(this, "Make Order",
             "Please, select product first");
     }
-
 }
 
 
@@ -92,5 +101,46 @@ void UserForm::insertOrder(int id, QString address)
     {
         QMessageBox::information(this, "Create order",
             "Order was sucsessfully created");
+    }
+}
+
+void UserForm::  loadTables()
+{
+    createTableModels();
+    QTableView* productsView = ui->tableView;
+    productsView->setModel(productsModel);
+    productsView->setColumnHidden(0, true);
+
+    QTableView* ordersView = ui->tableViewOrders;
+    ordersView->setModel(ordersModel);
+}
+
+void UserForm:: on_user_logined()
+{
+    loadTables();
+}
+
+void UserForm:: on_deleteButton_clicked()
+{
+    int selectedRow = ui->tableViewOrders->currentIndex().row();
+    if (selectedRow >= 0)
+    {
+
+        int id = ordersModel->index(selectedRow, 0).data().toInt();
+        QMessageBox::StandardButton button =
+            QMessageBox::question(this, "Delete order", "Delete this order?");
+        if (button == QMessageBox::Ok)
+        {
+            QSqlQuery query;
+            qDebug()<<query.prepare("DELETE FROM `order` WHERE orderid = ?") << id;
+            query.addBindValue(id);
+            qDebug()<<query.exec();
+            dynamic_cast<QSqlRelationalTableModel*>(ordersModel)->select();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this, "Make Order",
+            "Please, select product first");
     }
 }
