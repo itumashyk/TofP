@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     transportmanagerform.cpp \
     productmanagerform.cpp \
     tofpapplication.cpp \
-    basewidget.cpp
+    basewidget.cpp \
+    createcatalogdialog.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
@@ -28,45 +29,19 @@ HEADERS  += mainwindow.h \
     productmanagerform.h \
     tofpapplication.h \
     basewidget.h \
-    roles.h
+    roles.h \
+    Utils.h \
+    createcatalogdialog.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
     userform.ui \
     transportmanagerform.ui \
-    productmanagerform.ui
+    productmanagerform.ui \
+    createcatalogdialog.ui
 
 OTHER_FILES += \
     config.ini
 
 RESOURCES += \
     res.qrc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
