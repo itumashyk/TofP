@@ -28,6 +28,8 @@ void UserForm:: createTableModels()
     model->setHeaderData(Name, Qt::Horizontal, "Name");
     model->setHeaderData(Price, Qt::Horizontal, "Price, $");
     model->setHeaderData(Description, Qt::Horizontal, "Description");
+    model->setFilter("catalog_id IS NOT NULL");
+    model->removeColumn(5);
     model->select();
     productsModel = model;
 
@@ -92,6 +94,7 @@ void UserForm::insertOrder(int id, QString address)
     insertQuery.addBindValue(QDateTime::currentDateTime().toString(Qt::ISODate));
     insertQuery.addBindValue(address);
     error &= insertQuery.exec();
+    dynamic_cast<QSqlRelationalTableModel*>(ordersModel)->select();
     if (!error)
     {
         QMessageBox::critical(this, "Error while saving to DB.",

@@ -10,6 +10,12 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Product Manager Form</string>
   </property>
@@ -19,54 +25,69 @@
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
+     <y>30</y>
      <width>401</width>
-     <height>301</height>
+     <height>271</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>1</y>
+     <width>201</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>3</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMinimumSize</enum>
+    </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="createCatalog">
-        <property name="text">
-         <string>Create catalog</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Edit catalog</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Publish catalog</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>Delete catalog</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QPushButton" name="createCatalog">
+      <property name="text">
+       <string>Add good</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QTreeView" name="treeView"/>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Delete good</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>createCatalog</sender>
+   <signal>clicked()</signal>
+   <receiver>ProductManagerForm</receiver>
+   <slot>createCatalog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>536</x>
+     <y>268</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>createCatalog()</slot>
+ </slots>
 </ui>
