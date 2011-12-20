@@ -1,17 +1,19 @@
 #include "productmanagerform.h"
 #include "ui_productmanagerform.h"
-#include "createcatalogdialog.h"
 #include <QtSql>
 #include <QtGui>
+#include <Utils.h>
+#include <catalogeditor.h>
 
 ProductManagerForm::ProductManagerForm(QWidget *parent) :
     BaseWidget(parent),
     ui(new Ui::ProductManagerForm)
 {
     ui->setupUi(this);
+    setLayout(ui->gridLayout);
     createModels();
-    ui->tableView->setModel(goodsModel);
-    ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setModel(catalogsModel);
+//    ui->tableView->setColumnHidden(0, true);
 }
 
 ProductManagerForm::~ProductManagerForm()
@@ -21,59 +23,72 @@ ProductManagerForm::~ProductManagerForm()
 
 void ProductManagerForm::createModels()
 {
-    QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
-
-   model->setTable("good");
-   model->setFilter("catalog_id = 1");
-   model->removeColumn(1);
-   model->removeColumn(4);
-
-   model->select();
-    goodsModel = model;
-
+    catalogsModel = Utils::getCatalogsModel();
+    catalogsModel->select();
 }
 
 void ProductManagerForm::on_createCatalog_clicked()
 {
-    CreateCatalogDialog * dialog = new CreateCatalogDialog(this);
-    dialog->exec();
-    onUpdateModel();
+//    CreateCatalogDialog * dialog = new CreateCatalogDialog(this);
+//    dialog->exec();
+//    onUpdateModel();
 }
 
 void ProductManagerForm::onUpdateModel()
 {
-    goodsModel->select();
+    catalogsModel->select();
 }
 
 void ProductManagerForm::on_pushButton_clicked()
 {
-    bool error = true;
-    QSqlQuery query;
-    error &= query.prepare("UPDATE `good` SET catalog_id = NULL WHERE goodid = ?");
-
     int row = ui->tableView->currentIndex().row();
-    if (row >= 0)
-    {
-        int goodId = goodsModel->index(row, 0).data().toInt();
-        qDebug() << goodId;
-        query.addBindValue(goodId);
-        qDebug() << query.lastQuery();
-        error &= query.exec();
-        if (!error)
-        {
-            QMessageBox::critical(this, "Error while adding product to Catalog.",
-                query.lastError().text());
-        }
-        else
-        {
-            QMessageBox::information(this, "Delete product",
-                "Product was deleted from Catalog");
-            onUpdateModel();
-        }
-    }
-    else
-    {
+    if (row >= 0) {
+        int goodId = catalogsModel->index(row, 0).data().toInt();
+        Utils::deleteProductFromCatalog(goodId);
+        onUpdateModel();
+    } else {
         QMessageBox::warning(this, "Add product",
             "Please, select product first");
     }
+}
+
+void ProductManagerForm::on_pushButton_2_clicked()
+{
+    bool ok;
+    QString name = QInputDialog::getText(this, "New Catalog", "Enter the name of new Catalog",
+                                           QLineEdit::Normal, "", &ok);
+    if (ok) {
+        Utils::addNewCatalog(name);
+    }
+    onUpdateModel();
+
+}
+
+void ProductManagerForm::on_pushButton_4_clicked()
+{
+    int row = ui->tableView->currentIndex().row();
+    if (row >= 0) {
+        int id = catalogsModel->index(row, 0).data().toInt();
+        Utils::deleteCatalog(id);
+        onUpdateModel();
+    } else {
+        QMessageBox::warning(this, "Delete catalog",
+            "Please, select catalog first");
+    }
+}
+
+void ProductManagerForm::on_pushButton_3_clicked()
+{
+    int row = ui->tableView->currentIndex().row();
+    if (row >= 0) {
+        int catalogId = catalogsModel->index(row, 0).data().toInt();
+        QString name = catalogsModel->index(row, 2).data().toString();
+        qDebug() << "catalogId = " << catalogId;
+        CatalogEditor dialog(catalogId, name, this);
+        dialog.exec();
+    } else {
+        QMessageBox::warning(this, "Edit catalog",
+            "Please, select catalog first");
+    }
+
 }

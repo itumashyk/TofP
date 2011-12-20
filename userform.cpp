@@ -23,13 +23,16 @@ void UserForm:: createTableModels()
     QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
     model->setTable("good");
     model->setRelation(Producer, QSqlRelation("company", "companyid", "name"));
+    model->setRelation(Catalog, QSqlRelation("catalog", "id", "name"));
 
     model->setHeaderData(Producer, Qt::Horizontal, "Producer");
     model->setHeaderData(Name, Qt::Horizontal, "Name");
     model->setHeaderData(Price, Qt::Horizontal, "Price, $");
     model->setHeaderData(Description, Qt::Horizontal, "Description");
+    model->setHeaderData(Catalog, Qt::Horizontal, "Catalog");
     model->setFilter("catalog_id IS NOT NULL");
-    model->removeColumn(5);
+
+//    model->removeColumn(5);
     model->select();
     productsModel = model;
 
@@ -59,10 +62,15 @@ void UserForm::on_orderButton_clicked()
         QString price = productsModel->index(selectedRow,Price).data().toString();
         int id = productsModel->index(selectedRow, 0).data().toInt();
 
+        bool ok;
         QString label = "You are going to by " + name + " for " + price +
             "$. " + "Please, inser address to deliver:";
-        QString adress = QInputDialog::getText(this, "Order Product", label);
-        insertOrder(id, adress);
+        QString adress = QInputDialog::getText(this, "Order Product", label,
+                                               QLineEdit::Normal, "", &ok);
+        if (ok) {
+            insertOrder(id, adress);
+        }
+
     }
     else
     {

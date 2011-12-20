@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddProductDialog</class>
- <widget class="QDialog" name="AddProductDialog">
+ <class>EditCatalogDialog</class>
+ <widget class="QDialog" name="EditCatalogDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,10 +16,10 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>8</y>
+     <x>30</x>
+     <y>0</y>
      <width>258</width>
-     <height>223</height>
+     <height>254</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -35,6 +35,9 @@
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout"/>
     </item>
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
@@ -54,12 +57,12 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>AddProductDialog</receiver>
+   <receiver>EditCatalogDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>275</x>
-     <y>274</y>
+     <x>248</x>
+     <y>254</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -70,32 +73,16 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>AddProductDialog</receiver>
+   <receiver>EditCatalogDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>275</x>
-     <y>262</y>
+     <x>316</x>
+     <y>260</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>AddProductDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>165</x>
-     <y>268</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>39</x>
-     <y>273</y>
     </hint>
    </hints>
   </connection>

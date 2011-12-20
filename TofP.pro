@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     productmanagerform.cpp \
     tofpapplication.cpp \
     basewidget.cpp \
-    createcatalogdialog.cpp
+    catalogeditor.cpp \
+    utils.cpp \
+    editcatalogdialog.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
@@ -30,15 +32,18 @@ HEADERS  += mainwindow.h \
     tofpapplication.h \
     basewidget.h \
     roles.h \
-    Utils.h \
-    createcatalogdialog.h
+    catalogeditor.h \
+    utils.h \
+    editcatalogdialog.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
     userform.ui \
     transportmanagerform.ui \
     productmanagerform.ui \
-    createcatalogdialog.ui
+    createcatalogdialog.ui \
+    catalogeditor.ui \
+    editcatalogdialog.ui
 
 OTHER_FILES += \
     config.ini

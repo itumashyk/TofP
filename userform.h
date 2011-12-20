@@ -19,7 +19,8 @@ public:
         Producer = 1,
         Name,
         Price,
-        Description
+        Description,
+        Catalog
     };
 
     enum ColumnOrder{
